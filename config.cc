@@ -43,10 +43,21 @@ namespace global {
   }
 
   // =========================================================================
-  void config::parse_line(const std::string& line)
+  void config::parse_line(std::string line)
   {
-    const std::regex split_regex("[\t ]*=[\t ]*");
+    // Test ilform lines
+    const std::regex regular_regex("[a-zA-Z0-9]+[\t ]*=[\t ]*");
+    if(!std::regex_search(line, regular_regex))
+      return;
 
+    // Remove comments 
+    {
+      const auto p = line.find_first_of("#");
+      if (p != std::string::npos)
+        line.erase(p);
+    }
+
+    const std::regex split_regex("[\t ]*=[\t ]*");
     std::vector<std::string> tokens
     { 
       std::sregex_token_iterator(line.begin(), line.end(), split_regex, -1), // begin()
@@ -66,14 +77,6 @@ namespace global {
         tokens[1].erase(p+1);
     }
 
-    //const std::regex reg_integer("(\\+|-)?[[:digit:]]+");
-    //const std::regex reg_float("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?((e|E)((\\+|-)?)[[:digit:]]+)?");
-
-    //if(std::regex_match(tokens[1], reg_integer))
-    //  std::cout<<"integer"<<std::endl;
-    //else if (std::regex_match(tokens[1], reg_float))
-    //  std::cout<<"float"<<std::endl;
-    //else
     {
       std::string data;
       std::smatch m;

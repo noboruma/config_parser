@@ -26,7 +26,7 @@ namespace global
   {
     config(const std::string& config_file);
 
-    template<typename T>
+    template<typename T, bool force_cast=false>
     T get_parameter(const std::string& param);
 
     template<typename T>
@@ -34,7 +34,7 @@ namespace global
 
 
     protected:
-    void parse_line(const std::string& line);
+    void parse_line(std::string line);
     void parse_file(const std::string& filepath);
 
     private:

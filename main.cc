@@ -9,10 +9,10 @@ int main()
       get_parameter<std::string>("ADDR")<<std::endl;
 
   std::cout<<global::config_manager::get().
-      get_parameter<int>("PORT")<<std::endl;
+      get_parameter<int>("port")<<std::endl;
 
   std::cout<<global::config_manager::get().
-      get_parameter<float>("por")<<std::endl;
+      get_parameter<float>("pi")<<std::endl;
 
   return 0;
 }
