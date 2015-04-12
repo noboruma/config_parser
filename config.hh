@@ -22,9 +22,9 @@
 
 namespace global 
 {
-  struct config
+  struct config_parser
   {
-    config(const std::string& config_file);
+    config_parser(const std::string& config_file);
 
     template<typename T, bool force_cast=false>
     T get_parameter(const std::string& param);
@@ -41,7 +41,7 @@ namespace global
     std::unordered_map<std::string, std::string> _parameters;
   };
 
-  struct config_manager : public config
+  struct config_manager : public config_parser
   {
     static void init(const std::string &file=nullptr)
     {
@@ -56,7 +56,7 @@ namespace global
     }
 
     private:
-      config_manager(const std::string& file) : config(file) {}
+      config_manager(const std::string& file) : config_parser(file) {}
       static config_manager* singleton;
   };
 } //!global

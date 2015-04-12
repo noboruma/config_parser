@@ -5,7 +5,7 @@ namespace global {
   config_manager* config_manager::singleton = nullptr;
 
   // =========================================================================
-  config::config(const std::string& config_file)
+  config_parser::config_parser(const std::string& config_file)
   {
     add_parameter("filename", config_file);
     parse_file(config_file);
@@ -13,7 +13,7 @@ namespace global {
 
   // =========================================================================
   template<>
-  std::string config::get_parameter(const std::string &param)
+  std::string config_parser::get_parameter(const std::string &param)
   {
 
     std::string lowkey = param;
@@ -26,7 +26,7 @@ namespace global {
   }
 
   // =========================================================================
-  void config::parse_file(const std::string& filepath)
+  void config_parser::parse_file(const std::string& filepath)
   {
     if(filepath.empty())
     {
@@ -43,7 +43,7 @@ namespace global {
   }
 
   // =========================================================================
-  void config::parse_line(std::string line)
+  void config_parser::parse_line(std::string line)
   {
     // Test ilform lines
     const std::regex regular_regex("[a-zA-Z0-9]+[\t ]*=[\t ]*");

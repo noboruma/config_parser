@@ -2,7 +2,7 @@ namespace global {
 
   // =========================================================================
   template<typename T>
-  void config::add_parameter(const std::string &key, const T &value)
+  void config_parser::add_parameter(const std::string &key, const T &value)
   {
     std::ostringstream ostr;
     ostr << value;
@@ -18,7 +18,7 @@ namespace global {
 
   // =========================================================================
   template<typename T, bool force_cast>
-  T config::get_parameter(const std::string& param)
+  T config_parser::get_parameter(const std::string& param)
   {
     std::string lowkey = param;
     std::transform(lowkey.begin(), lowkey.end(), lowkey.begin(), ::tolower);

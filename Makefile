@@ -6,3 +6,7 @@ main.o: main.cc
 
 config.o: config.cc
 	g++ -std=c++11 -c config.cc
+
+clean:
+	rm ./*.o
+	rm ./a.out
