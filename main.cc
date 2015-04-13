@@ -5,14 +5,13 @@ int main()
 {
   global::config_manager::init("toto.conf");
 
-  std::cout<<global::config_manager::get().
-      get_parameter<std::string>("ADDR")<<std::endl;
+  std::cout<<global::config::get<std::string>("ADDR")<<std::endl;
 
-  std::cout<<global::config_manager::get().
-      get_parameter<int>("port")<<std::endl;
+  std::cout<<global::config::get<int>("port")<<std::endl;
 
-  std::cout<<global::config_manager::get().
-      get_parameter<float>("pi")<<std::endl;
+  std::cout<<global::config::get<float>("pi")<<std::endl;
+
+  global::config_manager::finish();
 
   return 0;
 }

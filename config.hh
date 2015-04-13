@@ -22,6 +22,7 @@
 
 namespace global 
 {
+
   struct config_parser
   {
     config_parser(const std::string& config_file);
@@ -48,17 +49,31 @@ namespace global
       singleton = new config_manager(file);
     }
 
-    static config_manager& get()
+    static config_manager& get_instance()
     {
       if(singleton == nullptr)
         throw std::logic_error("config manager not initialized");
       return *singleton;
     }
 
+    template<typename T>
+    static T get(const std::string &param)
+    {
+      return get_instance().get_parameter<T>(param);
+    }
+
+    static void finish()
+    {
+      delete singleton;
+      singleton = nullptr;
+    }
+
     private:
       config_manager(const std::string& file) : config_parser(file) {}
       static config_manager* singleton;
   };
+
+  typedef config_manager config;
 } //!global
 
 #include "config.hxx"
