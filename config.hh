@@ -22,10 +22,10 @@
 
 namespace global 
 {
-
   struct config_parser
   {
-    config_parser(const std::string& config_file);
+    config_parser();
+    void load_file(const std::string& config_file);
 
     template<typename T, bool force_cast=false>
     T get_parameter(const std::string& param);
@@ -44,16 +44,16 @@ namespace global
 
   struct config_manager : public config_parser
   {
-    static void init(const std::string &file=nullptr)
+    static void load(const std::string &file=nullptr)
     {
-      singleton = new config_manager(file);
+      singleton()->load_file(file);
     }
 
     static config_manager& get_instance()
     {
       if(singleton == nullptr)
         throw std::logic_error("config manager not initialized");
-      return *singleton;
+      return *singleton();
     }
 
     template<typename T>
@@ -64,13 +64,18 @@ namespace global
 
     static void finish()
     {
-      delete singleton;
-      singleton = nullptr;
+      delete singleton();
+      singleton() = nullptr;
+    }
+
+    inline static config_manager*& singleton()
+    {
+      static config_manager* singleton = new config_manager();
+      return singleton;
     }
 
     private:
-      config_manager(const std::string& file) : config_parser(file) {}
-      static config_manager* singleton;
+      config_manager() : config_parser() {}
   };
 
   typedef config_manager config;

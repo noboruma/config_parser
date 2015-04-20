@@ -3,7 +3,7 @@
 
 int main()
 {
-  global::config_manager::init("toto.conf");
+  global::config_manager::load("toto.conf");
 
   std::cout<<global::config::get<std::string>("ADDR")<<std::endl;
 
