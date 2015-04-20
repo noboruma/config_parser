@@ -1,5 +1,5 @@
 #include <iostream>
-#include "config.hh"
+#include "../config.hh"
 
 int main()
 {

@@ -40,10 +40,6 @@ namespace global {
     std::string line;
     while(std::getline(file, line))
       parse_line(line);
-
-    file.close();
-  }
-
   // =========================================================================
   void config_parser::parse_line(std::string line)
   {
