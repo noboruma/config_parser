@@ -68,13 +68,13 @@ namespace global
       singleton() = nullptr;
     }
 
-    inline static config_manager*& singleton()
-    {
-      static config_manager* singleton = new config_manager();
-      return singleton;
-    }
-
     private:
+      inline static config_manager*& singleton()
+      {
+        static config_manager* singleton = new config_manager();
+        return singleton;
+      }
+
       config_manager() : config_parser() {}
   };
 
