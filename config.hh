@@ -30,6 +30,9 @@ namespace global
     template<typename T, bool force_cast=false>
     T get_parameter(const std::string& param);
 
+    template<typename T, bool force_cast=false>
+    std::vector<T> get_parameter_list(const std::string& param);
+
     template<typename T>
     void add_parameter(const std::string &key, const T &value);
 
@@ -56,10 +59,16 @@ namespace global
       return *singleton();
     }
 
-    template<typename T>
+    template<class T, bool force_cast=false>
     static T get(const std::string &param)
     {
       return get_instance().get_parameter<T>(param);
+    }
+
+    template<class T, bool force_cast=false>
+    static std::vector<T> get_list(const std::string &param)
+    {
+      return get_instance().get_parameter_list<T>(param);
     }
 
     static void finish()

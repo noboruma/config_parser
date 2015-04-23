@@ -11,6 +11,10 @@ int main()
 
   std::cout<<global::config::get<float>("pi")<<std::endl;
 
+  std::vector<float> l = global::config::get_list<float>("list");
+  for(auto& i : l)
+    std::cout<<i<<std::endl;
+
   global::config_manager::finish();
 
   return 0;
