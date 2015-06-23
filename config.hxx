@@ -101,6 +101,15 @@ namespace global {
   }
 
   // =========================================================================
+  bool config_parser::isset_parameter(const std::string& param)
+  {
+    std::string lowkey = param;
+    std::transform(lowkey.begin(), lowkey.end(), lowkey.begin(), ::tolower);
+
+    return _parameters.find(lowkey) != _parameters.end();
+  }
+
+  // =========================================================================
   template<>
   std::string config_parser::get_parameter(const std::string &param)
   {
@@ -130,6 +139,7 @@ namespace global {
     while(std::getline(file, line))
       parse_line(line);
   }
+
   // =========================================================================
   void config_parser::parse_line(std::string line)
   {

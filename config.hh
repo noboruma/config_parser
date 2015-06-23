@@ -36,6 +36,7 @@ namespace global
     template<typename T>
     void add_parameter(const std::string &key, const T &value);
 
+    bool isset_parameter(const std::string& param);
 
     protected:
     void parse_line(std::string line);
@@ -54,9 +55,14 @@ namespace global
 
     static config_manager& get_instance()
     {
-      if(singleton == nullptr)
+      if(singleton() == nullptr)
         throw std::logic_error("config manager not initialized");
       return *singleton();
+    }
+
+    static bool isset(const std::string &param)
+    {
+      return get_instance().isset_parameter(param);
     }
 
     template<class T, bool force_cast=false>
